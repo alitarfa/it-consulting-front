@@ -1,0 +1,44 @@
+<h3 mat-dialog-title>Create new User</h3>
+<mat-dialog-content>
+  <form [formGroup]="formGroupCreation">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last name" formControlName="lastname">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Function</mat-label>
+        <input matInput placeholder="Function" formControlName="function">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Experience</mat-label>
+        <input type="number" matInput placeholder="Experience" formControlName="experience">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" formControlName="address">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Salary</mat-label>
+        <input type="number" matInput placeholder="Salary" formControlName="salary">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Birth day</mat-label>
+        <input matInput placeholder="Birth day" formControlName="birthday">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button color="primary" (click)="onCreateUser()">{{action}}</button>
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
