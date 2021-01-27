@@ -35,7 +35,7 @@ export class ApiServiceService {
     return this.http.get(this.baseURL + '?page=' + page + '&size=' + size, {observe: 'response'});
   }
 
-  applyFilter(selectedValue: string) {
+  applyFilter(selectedValue: string): Observable<HttpResponse<any>> {
     return this.http.get(this.baseURL + '/search?filter=' + selectedValue, {observe: 'response'});
   }
 

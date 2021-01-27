@@ -31,8 +31,23 @@ export class DialogFormComponent implements OnInit {
   onCreateUser() {
     if (this.formGroupCreation.valid) {
       let user = this.formGroupCreation.value as IUser;
-      this.apiService.create(user).subscribe(value => this.dialogRef.close());
+      if (this.isUpdate) {
+        this.update(user);
+      } else {
+        this.apiService.create(user)
+          .subscribe(value => this.dialogRef.close());
+      }
     }
+  }
+
+  private update(user: IUser) {
+    this.data.birthday = user.birthday;
+    this.data.lastname = user.lastname;
+    this.data.salary = user.salary;
+    this.data.function = user.function;
+    this.data.experiences = user.experiences;
+    this.apiService.update(this.data)
+      .subscribe(value => this.dialogRef.close())
   }
 
   private initForm() {

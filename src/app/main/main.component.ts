@@ -5,7 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogFormComponent} from "../dialog-form/dialog-form.component";
 import {IUser} from "../entities/user";
 import {ApiServiceService} from "../api-service.service";
-import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-main',
@@ -16,7 +15,8 @@ export class MainComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['lastname', 'function', 'experiences', 'address', 'salary', 'birthday', "action"];
   dataSource = new MatTableDataSource<IUser>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  selectedValue: string;
+  selectedValue: string = 'function';
+  public filterList: string [] = ['lastname', 'function', 'address', 'birthday'];
 
   constructor(private dialogCreation: MatDialog,
               private apiService: ApiServiceService) {
@@ -36,7 +36,6 @@ export class MainComponent implements OnInit, AfterViewInit {
   private onFetchData() {
     this.apiService.find(0, 10).subscribe(response => {
       this.dataSource.data = response.body;
-      console.log(response.body)
     });
   }
 
@@ -45,19 +44,17 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   onApplyFilter() {
-    //this.apiService.applyFilter(this.selectedValue).subscribe(value => console.log(value.body));
-    this.apiService.find(0, 10)
+    this.apiService.applyFilter(this.selectedValue)
       .subscribe(value => {
-        let body = value.body;
-        body.filter(value => {
-          if (value[this.selectedValue] >= 2) {
-
-          }
-        })
+        this.dataSource.data = value.body;
       })
   }
 
   onDelete(element: any) {
     this.apiService.delete(element.id).subscribe();
+  }
+
+  resetAll() {
+    this.onFetchData();
   }
 }

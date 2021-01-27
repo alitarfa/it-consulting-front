@@ -63,14 +63,15 @@
 </div>
 
 <div class="criteria-section">
-  <button mat-raised-button>Display All</button>
+  <button mat-raised-button (click)="resetAll()">Display All</button>
+  <div class="gap2"></div>
   <mat-form-field appearance="outline">
     <mat-label>Criteria</mat-label>
     <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let item of displayedColumns" [value]="item">
+      <mat-option *ngFor="let item of filterList" [value]="item">
         {{item}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button (click)="onApplyFilter()">Dédoublone</button>
+  <button color="primary" mat-raised-button (click)="onApplyFilter()">Dédoublone</button>
 </div>
